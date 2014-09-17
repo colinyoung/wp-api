@@ -20,8 +20,12 @@ module WP::API
 
     def get(resource, query = {})
       path = url_for(resource, query)
-      body = Client.get(path).body
-      parse(body)
+      response = Client.get(path)
+      if response.empty?
+        raise WP::API::ResourceNotFoundError
+      else
+        response.body # Already parsed.
+      end
     end
 
     private
@@ -42,11 +46,6 @@ module WP::API
       uri.query_values = filter_hash
 
       uri.query
-    end
-
-    def parse(string)
-      @parser ||= Yajl::Parser.new
-      @parser.parse(string)
     end
   end
 end
