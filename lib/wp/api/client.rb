@@ -1,9 +1,12 @@
 require 'httparty'
 require 'yajl'
+require 'addressable/uri'
+require 'wp/api/endpoints'
 
 module WP::API
   class Client
     include HTTParty
+    include Endpoints
 
     attr_accessor :host
 
@@ -13,24 +16,27 @@ module WP::API
       fail ':host is required' unless host.is_a?(String) && host.length > 0
     end
 
-    def posts
-      index(:posts).collect do |hash|
-        Post.new(hash)
-      end
-    end
-
     protected
 
-    def index(resource)
-      path = path_to_url(resource)
+    def get(resource, query = {})
+      path = url_for(resource, query)
       body = Client.get(path).body
       parse(body)
     end
 
     private
 
-    def path_to_url(fragment)
-      "#{@scheme}://#{@host}/wp-json/#{fragment}"
+    def url_for(fragment, query)
+      url = "#{@scheme}://#{@host}/wp-json/#{fragment}"
+      url << ("?" + params(query)) unless query.empty?
+
+      url
+    end
+
+    def params(query)
+      uri = Addressable::URI.new
+      uri.query_values = query
+      uri.query
     end
 
     def parse(string)
