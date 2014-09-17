@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = WP::API::VERSION
   spec.authors       = ["Colin Young"]
   spec.email         = ["me@colinyoung.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
-  spec.homepage      = ""
+  spec.summary       = %q{Easily access Wordpress blogs that have the new, RESTful WP API plugin installed.}
+  spec.description   = %q{Makes it incredibly easy and semantic to access Wordpress blogs that have the new, RESTful WP API plugin installed.}
+  spec.homepage      = "https://github.com/colinyoung/wp-api"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
