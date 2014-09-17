@@ -1,5 +1,3 @@
-require 'pry'
-
 describe WP::API do
   context "raw HTTP request" do
     let(:response) { HTTParty.get('http://wp.example.com/wp-json/posts').body }
@@ -52,6 +50,22 @@ describe WP::API do
 
         it "should not be converted to a class" do
           expect(meta).to be_a Hash
+        end
+      end
+
+      context "categories" do
+        let(:categories) { subject.categories }
+
+        before do
+          p subject.terms
+        end
+
+        it "should be converted to a class" do
+          expect(categories.first).to be_a WP::API::Category
+        end
+
+        it "should respond to #to_param" do
+          expect(categories.first.to_param).to eq "foxes"
         end
       end
     end

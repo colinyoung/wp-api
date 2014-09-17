@@ -165,6 +165,21 @@
           "self": "http:\/\/wp.example.com\/wp-json\/taxonomies\/post_tag\/terms\/2"
         }
       }
+    }],
+    "category": [{
+      "ID": 4,
+      "name": "Cars",
+      "slug": "cars",
+      "description": "",
+      "parent": null,
+      "count": 1,
+      "link": "http:\/\/wp.example.com\/category\/cars\/",
+      "meta": {
+        "links": {
+          "collection": "http:\/\/wp.example.com\/wp-json\/taxonomies\/category\/terms",
+          "self": "http:\/\/wp.example.com\/wp-json\/taxonomies\/category\/terms\/4"
+        }
+      }
     }]
   }
 }
