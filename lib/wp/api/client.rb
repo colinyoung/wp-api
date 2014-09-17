@@ -35,7 +35,12 @@ module WP::API
 
     def params(query)
       uri = Addressable::URI.new
-      uri.query_values = query
+      filter_hash = {}
+      query.each do |key, value|
+        filter_hash["filter[#{key}]"] = value
+      end
+      uri.query_values = filter_hash
+
       uri.query
     end
 
