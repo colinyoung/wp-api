@@ -1,6 +1,6 @@
 require 'wp/api/version'
 require 'wp/api/resource'
-Dir['lib/wp/api/resources/*.rb'].each {|resource| require resource }
+Dir[File.expand_path(File.dirname(__FILE__) + '/api/resources/*.rb')].each {|resource| require resource }
 require 'wp/api/client'
 
 require 'httparty'
