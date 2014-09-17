@@ -14,8 +14,8 @@ class MockWordpressServer
   protected
 
   def register_all
-    FakeWeb.register_uri(:get, "http://#{host}/wp-json/posts", :body => support_file("posts.json"))
-    FakeWeb.register_uri(:get, "http://#{host}/wp-json/posts/1", :body => support_file("posts/1.json"))
-    FakeWeb.register_uri(:get, "http://#{host}/wp-json/posts/2", :body => support_file("posts/2.json"))
+    FakeWeb.register_uri(:get, "http://#{host}/wp-json/posts", :body => support_file("posts.json"), :content_type => "application/json")
+    FakeWeb.register_uri(:get, "http://#{host}/wp-json/posts/1", :body => support_file("posts/1.json"), :content_type => "application/json")
+    FakeWeb.register_uri(:get, "http://#{host}/wp-json/posts/2", :body => support_file("posts/2.json"), :content_type => "application/json")
   end
 end

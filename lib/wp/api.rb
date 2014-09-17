@@ -5,7 +5,6 @@ Dir[File.expand_path(File.dirname(__FILE__) + '/api/resources/*.rb')].each {|res
 require 'wp/api/client'
 
 require 'httparty'
-require 'yajl'
 
 module WP
   module API

@@ -1,5 +1,4 @@
 require 'httparty'
-require 'yajl'
 require 'addressable/uri'
 require 'wp/api/endpoints'
 
@@ -24,7 +23,7 @@ module WP::API
       if response.empty?
         raise WP::API::ResourceNotFoundError
       else
-        response.body # Already parsed.
+        response.parsed_response # Already parsed.
       end
     end
 
