@@ -5,6 +5,7 @@ module WP::API
     attr_reader :attributes
 
     def initialize(attributes)
+      raise ResourceNotFoundError.new(self.class.name) if attributes.nil?
       @attributes = attributes
     end
 
