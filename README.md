@@ -4,17 +4,8 @@ Makes it incredibly easy and semantic to access Wordpress blogs that have the ne
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
     gem 'wp-api'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install wp-api
+    bundle
 
 ## Usage
 
