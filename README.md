@@ -1,6 +1,6 @@
-# Wp::Api
+# WP::API
 
-TODO: Write a gem description
+Makes it incredibly easy and semantic to access Wordpress blogs that have the new, RESTful WP API plugin installed.
 
 ## Installation
 
@@ -18,12 +18,16 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+client = WP::API['yourwpsite.com']
 
-## Contributing
+# List all posts
+client.posts
 
-1. Fork it ( https://github.com/[my-github-username]/wp-api/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+# List all users
+client.users
+```
+
+## Author
+
+@colinyoung
