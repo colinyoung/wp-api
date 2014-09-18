@@ -29,5 +29,4 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec", '>= 2.0'
   spec.add_development_dependency "rspec-its", '>= 1.0.1'
   spec.add_development_dependency "fakeweb", '~> 1.3', '>= 1.3.0'
-  spec.add_development_dependency "pry"
 end
