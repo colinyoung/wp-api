@@ -1,5 +1,15 @@
+require 'htmlentities'
+
 module WP::API
   class Post < Resource
+    def title
+      _remove_entities(super)
+    end
+
+    def content
+      _remove_entities(super)
+    end
+
     def categories
       terms['category'].collect {|cat| WP::API::Category.new(cat) }
     end

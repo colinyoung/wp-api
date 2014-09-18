@@ -49,6 +49,10 @@ module WP::API
       end
     end
 
+    def _remove_entities(string)
+      HTMLEntities.new.decode(string.gsub('&amp;','&'))
+    end
+
     def _downcase_keys(hash)
       Hash.new.tap do |new_hash|
         hash.each do |k, v|

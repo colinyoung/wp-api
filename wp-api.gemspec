@@ -21,6 +21,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'httparty'
   spec.add_runtime_dependency 'activesupport'
   spec.add_runtime_dependency 'addressable'
+  spec.add_runtime_dependency 'htmlentities'
 
   spec.add_development_dependency "bundler", "~> 1.6"
   spec.add_development_dependency "yajl-ruby", '~> 1.2.1'
