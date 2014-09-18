@@ -2,15 +2,16 @@ require 'active_support/inflector'
 
 module WP::API
   class Resource
-    attr_reader :attributes
+    attr_reader :attributes, :headers
 
-    def initialize(attributes)
+    def initialize(attributes, headers = {})
       raise ResourceNotFoundError.new(self.class.name) if attributes.nil?
       @attributes = attributes
+      @headers = _downcase_keys(headers).slice("link") if headers
     end
 
     def id
-      @attributes['ID']
+      attributes['ID']
     end
 
     protected
@@ -20,22 +21,22 @@ module WP::API
       determinant = key[-1]
       case determinant
       when '?' # example: post.sticky?
-        @attributes[key.chomp(determinant)] == true
+        attributes[key.chomp(determinant)] == true
       when '!' # unsupported
         fail NoMethodError.new(key)
       when '=' # example: post.title = 'my new title'
-        @attributes[key.chomp(determinant)] = new_value
+        attributes[key.chomp(determinant)] = new_value
       else
         # All other values. Hashes are converted to objects
         # if a resource for them exists (e.g. Authors)
-        object key, @attributes[key]
+        object key, attributes[key]
       end
     end
 
     private
 
     def to_s
-      @attributes.to_s
+      attributes.to_s
     end
 
     def object(key, value)
@@ -45,6 +46,14 @@ module WP::API
         resource.new(value)
       else
         value
+      end
+    end
+
+    def _downcase_keys(hash)
+      Hash.new.tap do |new_hash|
+        hash.each do |k, v|
+          new_hash[k.downcase] = v
+        end
       end
     end
   end

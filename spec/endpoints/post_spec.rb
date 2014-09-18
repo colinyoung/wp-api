@@ -17,6 +17,14 @@ describe WP::API do
       expect(subject).to be_a WP::API::Post
     end
 
+    it "should have an attributes hash" do
+      expect(subject.attributes).to be_a Hash
+    end
+
+    it "should have a headers hash" do
+      expect(subject.headers).to be_a Hash
+    end
+
     it "should have correct IDs" do
       expect(subject.id).to eq 1
     end

@@ -23,7 +23,7 @@ module WP::API
       if response.empty?
         raise WP::API::ResourceNotFoundError
       else
-        response.parsed_response # Already parsed.
+        [ response.parsed_response, response.headers ] # Already parsed.
       end
     end
 

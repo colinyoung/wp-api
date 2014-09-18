@@ -1,4 +1,5 @@
 require 'bundler/setup'
+require 'rspec/its'
 Bundler.setup
 
 $LOAD_PATH << File.dirname(__FILE__) + "/../"
