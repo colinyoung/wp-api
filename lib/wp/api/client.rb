@@ -1,6 +1,7 @@
 require 'httparty'
 require 'addressable/uri'
 require 'wp/api/endpoints'
+require 'active_support/hash_with_indifferent_access'
 
 module WP::API
   class Client
@@ -18,6 +19,7 @@ module WP::API
     protected
 
     def get(resource, query = {})
+      query = ActiveSupport::HashWithIndifferentAccess.new(query)
       path = url_for(resource, query)
       response = Client.get(path)
       if response.empty?
@@ -38,7 +40,7 @@ module WP::API
 
     def params(query)
       uri = Addressable::URI.new
-      filter_hash = {}
+      filter_hash = { page: query.delete('page') || 1 }
       query.each do |key, value|
         filter_hash["filter[#{key}]"] = value
       end
