@@ -56,10 +56,6 @@ describe WP::API do
       context "categories" do
         let(:categories) { subject.categories }
 
-        before do
-          p subject.terms
-        end
-
         it "should be converted to a class" do
           expect(categories.first).to be_a WP::API::Category
         end
@@ -67,6 +63,12 @@ describe WP::API do
         it "should respond to #to_param" do
           expect(categories.first.to_param).to eq "foxes"
         end
+      end
+
+      context "link headers" do
+        its(:next) { should == "/wp-json/posts?page=2" }
+        its(:prev) { should be_nil }
+        its('items.size') { should eq 2 }
       end
     end
 

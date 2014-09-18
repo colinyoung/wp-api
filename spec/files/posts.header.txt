@@ -1,0 +1,1 @@
+</wp-json/posts?page=2>; rel="next", <http://wp.twigtale.com/wp-json/posts/1>; rel="item"; title="First post", <http://wp.twigtale.com/wp-json/posts/2>; rel="item"; title="Second post"
