@@ -13,7 +13,7 @@ module WP::API
     end
 
     def post_named(slug)
-      WP::API::Post.new *get("posts", name: slug).first
+      posts(name: slug).first
     end
 
   end
