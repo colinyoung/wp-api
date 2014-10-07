@@ -23,6 +23,16 @@ client.posts
 
 # List all users
 client.users
+
+# List alternate post types
+client.posts(type: 'custom_posts')
+
+# Append paramters
+client.posts(posts_per_page: 1000)
+
+# Use basic auth (used to access post meta)
+client = WP::API::Client.new(host: 'yourwpsite.com', scheme: 'https', user: 'api', password: 'apipassword')
+client.post_meta(1234) # => metadata for post #1234
 ```
 
 ## Author

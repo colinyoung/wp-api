@@ -14,6 +14,11 @@ module WP::API
       attributes['ID']
     end
 
+    def meta(client = nil)
+      return super unless client
+      client.post_meta(id)
+    end
+
     protected
 
     def method_missing(key, new_value = nil)

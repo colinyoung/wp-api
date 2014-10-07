@@ -14,6 +14,10 @@ module WP::API
       terms['category'].collect {|cat| WP::API::Category.new(cat) }
     end
 
+    def tags
+      terms['post_tag'].collect {|cat| WP::API::Tag.new(cat) }
+    end
+
     def prev
       item = link_header_items.find {|rel, url| rel == "prev" }
       item.last if item

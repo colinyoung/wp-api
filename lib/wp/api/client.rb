@@ -10,10 +10,19 @@ module WP::API
 
     attr_accessor :host
 
-    def initialize(host:, scheme: 'http')
+    DIRECT_PARAMS = %w(type context filter)
+
+    def initialize(host:, scheme: 'http', user: nil, password: nil)
       @scheme = scheme
       @host = host
+      @user = user
+      @password = password
+
       fail ':host is required' unless host.is_a?(String) && host.length > 0
+    end
+
+    def inspect
+      to_s.sub(/>$/, '') + " @scheme=\"#{@scheme}\" @host=\"#{@host}\" @user=\"#{@user}\" @password=#{@password.present?}>"
     end
 
     protected
@@ -21,8 +30,14 @@ module WP::API
     def get(resource, query = {})
       query = ActiveSupport::HashWithIndifferentAccess.new(query)
       path = url_for(resource, query)
-      response = Client.get(path)
-      if response.empty?
+      
+      response = if authenticate?
+        Client.get(path, basic_auth: { username: @user, password: @password })
+      else
+        Client.get(path)
+      end
+
+      if response.code != 200
         raise WP::API::ResourceNotFoundError
       else
         [ response.parsed_response, response.headers ] # Already parsed.
@@ -30,6 +45,10 @@ module WP::API
     end
 
     private
+
+    def authenticate?
+      @user && @password
+    end
 
     def url_for(fragment, query)
       url = "#{@scheme}://#{@host}/wp-json/#{fragment}"
@@ -42,6 +61,7 @@ module WP::API
       uri = Addressable::URI.new
       filter_hash = { page: query.delete('page') || 1 }
       query.each do |key, value|
+        filter_hash[key] = value if DIRECT_PARAMS.include?(key) || key.include?('[')
         filter_hash["filter[#{key}]"] = value
       end
       uri.query_values = filter_hash

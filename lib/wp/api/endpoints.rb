@@ -13,6 +13,10 @@ module WP::API
       resource_named('posts', slug)
     end
 
+    def post_meta(id, query = {})
+      resource_subpath('posts', id, 'meta', query).first
+    end
+
     def pages(query = {})
       resources('pages', query)
     end
@@ -36,6 +40,10 @@ module WP::API
 
     def resource(res, id, query = {})
       resource_class(res).new *get("#{res}/#{id}", query)
+    end
+
+    def resource_subpath(res, id, subpath, query = {})
+      get("#{res}/#{id}/#{subpath}", query).first
     end
 
     def resource_named(res, slug)
