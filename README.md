@@ -2,7 +2,7 @@
 
 [![Circle CI](https://circleci.com/gh/colinyoung/wp-api.png?style=badge)](https://circleci.com/gh/colinyoung/wp-api)
 
-Makes it incredibly easy and semantic to access Wordpress blogs that have the new, RESTful WP API plugin installed.
+Makes it incredibly easy and semantic to access Wordpress blogs that have the [WP REST API plugin](http://wp-api.org/) installed (which is planned for full integration into wordpress core soon.)
 
 ## Installation
 
