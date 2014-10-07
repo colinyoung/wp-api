@@ -43,6 +43,7 @@ module WP::API
     end
 
     def resource_subpath(res, id, subpath, query = {})
+      query.merge(should_raise_on_empty: false)
       get("#{res}/#{id}/#{subpath}", query).first
     end
 

@@ -28,6 +28,7 @@ module WP::API
     protected
 
     def get(resource, query = {})
+      should_raise_on_empty = query.delete(:should_raise_on_empty) || true
       query = ActiveSupport::HashWithIndifferentAccess.new(query)
       path = url_for(resource, query)
       
@@ -38,6 +39,8 @@ module WP::API
       end
 
       if response.code != 200
+        raise WP::API::ResourceNotFoundError
+      elsif response.parsed_response.empty? && should_raise_on_empty
         raise WP::API::ResourceNotFoundError
       else
         [ response.parsed_response, response.headers ] # Already parsed.
