@@ -29,6 +29,14 @@ module WP::API
       resource_named('pages', slug)
     end
 
+    def item_named(slug)
+      begin
+        item = resource_named('posts', slug)
+      rescue WP::API::ResourceNotFoundError
+        item = resource_named('pages', slug)
+      end
+    end
+
     private
 
     def resources(res, query = {})
